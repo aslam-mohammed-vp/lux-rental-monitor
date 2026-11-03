@@ -151,5 +151,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/nocher/id-4886625.html": {
+    "url": "https://www.athome.lu/location/appartement/nocher/id-4886625.html",
+    "title": "Appartement 1 chambre \u00e0 Nocher",
+    "rent": 1200.0,
+    "area": 52.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
