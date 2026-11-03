@@ -15,7 +15,7 @@ def minutes(value):
     return hour * 60 + minute
 
 
-def should_run(now, start="07:00", end="23:00", interval="15"):
+def should_run(now, start="08:00", end="20:00", interval="15"):
     start_minute, end_minute = minutes(start), minutes(end)
     interval = int(interval)
     if interval < 15 or interval > 1440 or interval % 15:
@@ -24,7 +24,7 @@ def should_run(now, start="07:00", end="23:00", interval="15"):
     slot = (now.hour * 60 + now.minute) // 15 * 15
     elapsed = (slot - start_minute) % 1440
     window = (end_minute - start_minute) % 1440
-    return elapsed <= window and elapsed % interval == 0
+    return now.weekday() != 6 and elapsed <= window and elapsed % interval == 0
 
 
 def main():
@@ -34,8 +34,8 @@ def main():
     else:
         now = datetime.now(ZoneInfo(os.environ.get("MONITOR_TIMEZONE", "Europe/Luxembourg")))
         allowed = should_run(
-            now, os.environ.get("MONITOR_START", "07:00"),
-            os.environ.get("MONITOR_END", "23:00"),
+            now, os.environ.get("MONITOR_START", "08:00"),
+            os.environ.get("MONITOR_END", "20:00"),
             os.environ.get("MONITOR_INTERVAL_MINUTES", "15"),
         )
         print(f"Local time: {now.isoformat()}; run monitor: {allowed}")

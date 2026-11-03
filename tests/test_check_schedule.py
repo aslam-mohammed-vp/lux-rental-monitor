@@ -9,10 +9,20 @@ from scripts.check_schedule import main, should_run
 
 
 class ScheduleTest(unittest.TestCase):
+    def test_sundays_excluded_and_adjacent_days_allowed(self):
+        for day, expected in [(7, True), (8, False), (9, True)]:
+            with self.subTest(day=day):
+                self.assertEqual(should_run(datetime(2026, 11, day, 12)), expected)
+
+    def test_sunday_uses_local_calendar_day(self):
+        local = datetime(2026, 11, 7, 23, tzinfo=ZoneInfo("UTC")).astimezone(
+            ZoneInfo("Europe/Luxembourg"))
+        self.assertFalse(should_run(local, "00:00", "23:45"))
+
     def test_default_window_boundaries_and_delay(self):
-        for hour, minute, expected in [(6, 59, False), (7, 0, True),
-                                       (7, 17, True), (23, 0, True),
-                                       (23, 14, True), (23, 15, False)]:
+        for hour, minute, expected in [(7, 59, False), (8, 0, True),
+                                       (8, 17, True), (20, 0, True),
+                                       (20, 14, True), (20, 15, False)]:
             with self.subTest(hour=hour, minute=minute):
                 self.assertEqual(should_run(datetime(2026, 11, 3, hour, minute)), expected)
 
@@ -23,10 +33,10 @@ class ScheduleTest(unittest.TestCase):
         self.assertFalse(should_run(datetime(2026, 11, 3, 12), "22:00", "06:00", "30"))
 
     def test_local_window_in_winter_and_summer(self):
-        for month, utc_hour in [(1, 6), (7, 5)]:
+        for month, utc_hour in [(1, 7), (7, 6)]:
             local = datetime(2026, month, 3, utc_hour, tzinfo=ZoneInfo("UTC")).astimezone(
                 ZoneInfo("Europe/Luxembourg"))
-            self.assertEqual(local.hour, 7)
+            self.assertEqual(local.hour, 8)
             self.assertTrue(should_run(local))
 
     def test_invalid_configuration_fails(self):

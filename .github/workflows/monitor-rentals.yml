@@ -2,7 +2,8 @@ name: Monitor rentals
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/15 * * * 1-6'
+      timezone: 'Europe/Luxembourg'
   workflow_dispatch:
 
 permissions:
@@ -23,8 +24,8 @@ jobs:
       - name: Check configured monitoring hours
         id: window
         env:
-          MONITOR_START: ${{ vars.MONITOR_START || '07:00' }}
-          MONITOR_END: ${{ vars.MONITOR_END || '23:00' }}
+          MONITOR_START: ${{ vars.MONITOR_START || '08:00' }}
+          MONITOR_END: ${{ vars.MONITOR_END || '20:00' }}
           MONITOR_TIMEZONE: ${{ vars.MONITOR_TIMEZONE || 'Europe/Luxembourg' }}
           MONITOR_INTERVAL_MINUTES: ${{ vars.MONITOR_INTERVAL_MINUTES || '15' }}
         run: python3 scripts/check_schedule.py

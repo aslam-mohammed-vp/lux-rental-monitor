@@ -11,8 +11,9 @@ To test notifications:
 ## Rental monitoring
 
 The **Monitor rentals** workflow checks atHome and Immotop every 15 minutes
-from **07:00 through the 23:00 slot**, in **Europe/Luxembourg** local time
-(daylight saving adjusts automatically). Manual runs bypass the time window.
+from **08:00 through the 20:00 slot**, **Monday–Saturday**, in
+**Europe/Luxembourg** local time (daylight saving adjusts automatically).
+Manual runs bypass the time window and Sunday exclusion.
 Scheduled runs start after this workflow is pushed to the default branch;
 GitHub may delay scheduled runs.
 
@@ -22,8 +23,8 @@ variables:
 
 | Variable | Default | Meaning |
 | --- | --- | --- |
-| `MONITOR_START` | `07:00` | First local check slot, inclusive |
-| `MONITOR_END` | `23:00` | Last local check slot, inclusive |
+| `MONITOR_START` | `08:00` | First local check slot, inclusive |
+| `MONITOR_END` | `20:00` | Last local check slot, inclusive |
 | `MONITOR_TIMEZONE` | `Europe/Luxembourg` | IANA timezone |
 | `MONITOR_INTERVAL_MINUTES` | `15` | Multiple of 15, from 15 to 1440, counted from the start time |
 
@@ -34,7 +35,10 @@ small runner delays. Delayed runs use the current local slot; GitHub does not
 guarantee exact execution times or backfill missed checks.
 
 GitHub cron cannot read environment variables, so it triggers a lightweight
-schedule job every 15 minutes all day. Outside the configured slots, the actual
+schedule job every 15 minutes Monday–Saturday, using Luxembourg time for the
+cron calendar. No scheduled workflows are triggered on Luxembourg Sundays.
+The gate also excludes Sundays in `MONITOR_TIMEZONE` if overridden.
+Outside the configured slots, the actual
 monitor job is skipped before dependencies are installed or websites checked.
 Intervals below 15 minutes require changing the cron and schedule gate in code.
 
