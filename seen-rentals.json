@@ -88,5 +88,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/grevenmacher/id-9419220.html": {
+    "url": "https://www.athome.lu/location/appartement/grevenmacher/id-9419220.html",
+    "title": "Appartement 1 chambre \u00e0 Grevenmacher",
+    "rent": 1600.0,
+    "area": 68.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
