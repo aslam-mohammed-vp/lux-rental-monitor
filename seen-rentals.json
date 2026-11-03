@@ -205,5 +205,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/maison/boevange-clervaux/id-9404125.html": {
+    "url": "https://www.athome.lu/location/maison/boevange-clervaux/id-9404125.html",
+    "title": "Maison 2 chambres \u00e0 Boevange (Clervaux)",
+    "rent": 1800.0,
+    "area": 100.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
