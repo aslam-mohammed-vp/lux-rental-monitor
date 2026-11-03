@@ -61,5 +61,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/esch-sur-alzette/id-9370011.html": {
+    "url": "https://www.athome.lu/location/appartement/esch-sur-alzette/id-9370011.html",
+    "title": "Appartement 1 chambre \u00e0 Esch-sur-Alzette",
+    "rent": 1550.0,
+    "area": 57.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
