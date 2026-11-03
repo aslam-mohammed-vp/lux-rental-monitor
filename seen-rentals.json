@@ -34,5 +34,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/doncols/id-6931337.html": {
+    "url": "https://www.athome.lu/location/appartement/doncols/id-6931337.html",
+    "title": "Appartement 2 chambres \u00e0 Doncols",
+    "rent": 1400.0,
+    "area": 100.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
