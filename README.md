@@ -10,8 +10,8 @@ To test notifications:
 
 ## Rental monitoring
 
-The **Monitor rentals** workflow checks atHome and Immotop every 30 minutes
-(at minutes 17 and 47 UTC). It can also be started manually from Actions.
+The **Monitor rentals** workflow checks atHome and Immotop every 10 minutes
+(at minutes 00, 10, 20, 30, 40 and 50 UTC). It can also be started manually from Actions.
 Scheduled runs start after this workflow is pushed to the default branch;
 GitHub may delay scheduled runs.
 
