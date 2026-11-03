@@ -169,5 +169,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/rollingen/id-9360516.html": {
+    "url": "https://www.athome.lu/location/appartement/rollingen/id-9360516.html",
+    "title": "Appartement 2 chambres \u00e0 Rollingen",
+    "rent": 1700.0,
+    "area": 82.95,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
