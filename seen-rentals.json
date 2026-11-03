@@ -187,5 +187,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/schuttrange/id-9237542.html": {
+    "url": "https://www.athome.lu/location/appartement/schuttrange/id-9237542.html",
+    "title": "Appartement 2 chambres \u00e0 Schuttrange",
+    "rent": 1800.0,
+    "area": 102.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
