@@ -142,5 +142,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/mondorf-les-bains/id-9407429.html": {
+    "url": "https://www.athome.lu/location/appartement/mondorf-les-bains/id-9407429.html",
+    "title": "Appartement 1 chambre \u00e0 Mondorf-Les-Bains",
+    "rent": 1650.0,
+    "area": 62.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
