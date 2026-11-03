@@ -1,28 +1,30 @@
-# This is a basic workflow to help you get started with Actions
+name: Test iPhone Notification
 
-name: Test IPhone Notification
-
-# Controls when the workflow will run
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions: {}
+
 jobs:
   notify:
     runs-on: ubuntu-latest
-  # This workflow contains a single job called "build"
-  # Steps represent a sequence of tasks that will be executed as part of the job
+    timeout-minutes: 2
     steps:
-      # Runs a single command using the runners shell
       - name: Send Test Notification
         env:
-          NTFY_TOPIC: ${{secrets.NTFY_TOPIC}}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
-          curl --fail-with-body \
-          --retry 3 \
-          -H "Title: Lux Rental Monitor" \
-          -H "Priority: high" \
-          -H "Tags: hosue" \
-          -d "Success! your rental alerts are connected." \
-          "http:ntfy.sh/$NTFY_TOPIC"
+          if [[ -z "$NTFY_TOPIC" ]]; then
+            echo "::error::Set the NTFY_TOPIC repository secret before running this workflow."
+            exit 1
+          fi
+
+          curl --fail-with-body --silent --show-error \
+            --connect-timeout 10 \
+            --max-time 20 \
+            --retry 3 \
+            -H "Title: Lux Rental Monitor" \
+            -H "Priority: high" \
+            -H "Tags: house" \
+            -d "Success! your rental alerts are connected." \
+            "https://ntfy.sh/$NTFY_TOPIC"
