@@ -16,5 +16,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/differdange/id-9389731.html": {
+    "url": "https://www.athome.lu/location/appartement/differdange/id-9389731.html",
+    "title": "Appartement 1 chambre \u00e0 Differdange",
+    "rent": 1800.0,
+    "area": 55.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
