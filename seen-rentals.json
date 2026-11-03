@@ -133,5 +133,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/luxembourg/id-9409219.html": {
+    "url": "https://www.athome.lu/location/appartement/luxembourg/id-9409219.html",
+    "title": "Appartement \u00e0 Luxembourg-Centre ville",
+    "rent": 1800.0,
+    "area": 40.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
