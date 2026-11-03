@@ -2,7 +2,7 @@ name: Monitor rentals
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,7 +13,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  schedule:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      run_monitor: ${{ steps.window.outputs.run_monitor }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check configured monitoring hours
+        id: window
+        env:
+          MONITOR_START: ${{ vars.MONITOR_START || '07:00' }}
+          MONITOR_END: ${{ vars.MONITOR_END || '23:00' }}
+          MONITOR_TIMEZONE: ${{ vars.MONITOR_TIMEZONE || 'Europe/Luxembourg' }}
+          MONITOR_INTERVAL_MINUTES: ${{ vars.MONITOR_INTERVAL_MINUTES || '15' }}
+        run: python3 scripts/check_schedule.py
+
   monitor:
+    needs: schedule
+    if: needs.schedule.outputs.run_monitor == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:

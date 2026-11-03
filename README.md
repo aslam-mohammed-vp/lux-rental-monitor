@@ -10,10 +10,33 @@ To test notifications:
 
 ## Rental monitoring
 
-The **Monitor rentals** workflow checks atHome and Immotop every 10 minutes
-(at minutes 00, 10, 20, 30, 40 and 50 UTC). It can also be started manually from Actions.
+The **Monitor rentals** workflow checks atHome and Immotop every 15 minutes
+from **07:00 through the 23:00 slot**, in **Europe/Luxembourg** local time
+(daylight saving adjusts automatically). Manual runs bypass the time window.
 Scheduled runs start after this workflow is pushed to the default branch;
 GitHub may delay scheduled runs.
+
+Configure the schedule without editing code in **Settings → Secrets and variables
+→ Actions → Variables**. These repository variables become workflow environment
+variables:
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `MONITOR_START` | `07:00` | First local check slot, inclusive |
+| `MONITOR_END` | `23:00` | Last local check slot, inclusive |
+| `MONITOR_TIMEZONE` | `Europe/Luxembourg` | IANA timezone |
+| `MONITOR_INTERVAL_MINUTES` | `15` | Multiple of 15, from 15 to 1440, counted from the start time |
+
+Start/end times must use `HH:MM` on quarter-hour boundaries. Overnight windows
+are supported (for example, `22:00` to `06:00`). Equal start/end times allow
+just that slot. The last slot includes its following 14 minutes to tolerate
+small runner delays. Delayed runs use the current local slot; GitHub does not
+guarantee exact execution times or backfill missed checks.
+
+GitHub cron cannot read environment variables, so it triggers a lightweight
+schedule job every 15 minutes all day. Outside the configured slots, the actual
+monitor job is skipped before dependencies are installed or websites checked.
+Intervals below 15 minutes require changing the cron and schedule gate in code.
 
 It alerts on rentals matching all these criteria:
 
