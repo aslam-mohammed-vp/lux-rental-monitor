@@ -223,5 +223,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/luxembourg/id-9419291.html": {
+    "url": "https://www.athome.lu/location/appartement/luxembourg/id-9419291.html",
+    "title": "Appartement 1 chambre \u00e0 Luxembourg-Bonnevoie",
+    "rent": 1750.0,
+    "area": 68.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
