@@ -4,7 +4,36 @@ from dataclasses import replace
 from unittest.mock import patch
 from urllib.error import HTTPError
 
-from scripts.monitor_rentals import Listing, State, discover, parse_listing
+from scripts.monitor_rentals import Listing, State, discover, number, parse_listing, selected_sources
+
+
+class NumberTest(unittest.TestCase):
+    def test_locale_formats(self):
+        for value in [1600, 1600.0, "1.600,00", "1,600.00", "1600,00", "1 600", "1\u202f600", "1.600", "1,600"]:
+            with self.subTest(value=value):
+                self.assertEqual(number(value), 1600)
+        self.assertEqual(number("40,5"), 40.5)
+        self.assertEqual(number("9.15"), 9.15)
+
+    def test_malformed_values_are_rejected(self):
+        for value in ["1.600.00", "", "1,60,0"]:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                number(value)
+
+
+class SourcesTest(unittest.TestCase):
+    @patch.dict("os.environ", {}, clear=True)
+    def test_default_uses_athome(self):
+        self.assertEqual(list(selected_sources()), ["athome"])
+
+    @patch.dict("os.environ", {"MONITOR_SOURCES": "athome,immotop"})
+    def test_explicit_immotop_opt_in(self):
+        self.assertEqual(list(selected_sources()), ["athome", "immotop"])
+
+    @patch.dict("os.environ", {"MONITOR_SOURCES": "typo"})
+    def test_invalid_source_fails(self):
+        with self.assertRaises(ValueError):
+            selected_sources()
 
 
 IMMOTOP = "https://www.immotop.lu/annonces/1386319/"
@@ -41,6 +70,13 @@ class FiltersTest(unittest.TestCase):
 
 
 class ParserTest(unittest.TestCase):
+    def test_grouped_rent_with_decimal_comma(self):
+        html = ("<main><h1>Appartement à louer</h1><p>Loyer 1.600,00 €</p>"
+                "<p>Surface 60 m²</p><p>Garages 1</p></main>")
+        listing = parse_listing(html, IMMOTOP)
+        self.assertEqual(listing.rent, 1600)
+        self.assertTrue(listing.matches())
+
     def test_athome_live_layout_ignores_insurance_price(self):
         data = {"@type": "RealEstateListing", "url": ATHOME,
                 "about": {"@type": "Apartment", "numberOfBedrooms": 1,

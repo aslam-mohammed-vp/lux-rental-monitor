@@ -30,7 +30,26 @@ STATE_BRANCH = "rental-monitor-state"
 
 
 def number(value):
-    return float(re.sub(r"[\s\u00a0\u202f]", "", str(value)).replace(",", "."))
+    if isinstance(value, (int, float)):
+        return float(value)
+    value = re.sub(r"[\s\u00a0\u202f]", "", str(value))
+    # Accept European and English thousands grouping, with optional decimals.
+    if re.fullmatch(r"[+-]?\d{1,3}(?:\.\d{3})+(?:,\d+)?", value):
+        value = value.replace(".", "").replace(",", ".")
+    elif re.fullmatch(r"[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?", value):
+        value = value.replace(",", "")
+    elif re.fullmatch(r"[+-]?\d+(?:[.,]\d+)?", value):
+        value = value.replace(",", ".")
+    else:
+        raise ValueError(f"Invalid numeric value: {value!r}")
+    return float(value)
+
+
+def selected_sources():
+    sources = [source.strip() for source in os.environ.get("MONITOR_SOURCES", "athome").split(",")]
+    if not sources or any(source not in SEARCHES for source in sources):
+        raise ValueError("MONITOR_SOURCES must contain athome and/or immotop, separated by commas")
+    return {source: SEARCHES[source] for source in sources}
 
 
 def walk(value):
@@ -263,12 +282,17 @@ def main():
         raise RuntimeError("Set the NTFY_TOPIC repository secret")
     from playwright.sync_api import sync_playwright
 
+    sources = selected_sources()
+    print(f"Enabled sources: {', '.join(sources)}")
+    if "immotop" not in sources:
+        print("::warning::Immotop coverage disabled: automated access is blocked. "
+              "Set MONITOR_SOURCES=athome,immotop to retry it.")
     state = State()
     errors, sent = [], 0
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
         page = browser.new_page(locale="fr-FR")
-        for source, searches in SEARCHES.items():
+        for source, searches in sources.items():
             urls = set()
             for search in searches:
                 try:

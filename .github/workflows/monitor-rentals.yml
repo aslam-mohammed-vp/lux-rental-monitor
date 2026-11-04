@@ -2,7 +2,9 @@ name: Monitor rentals
 
 on:
   schedule:
-    - cron: '*/15 * * * 1-6'
+    - cron: '*/15 8-19 * * 1-6'
+      timezone: 'Europe/Luxembourg'
+    - cron: '0 20 * * 1-6'
       timezone: 'Europe/Luxembourg'
   workflow_dispatch:
 
@@ -52,4 +54,5 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           GH_TOKEN: ${{ github.token }}
           PYTHONUNBUFFERED: '1'
+          MONITOR_SOURCES: ${{ vars.MONITOR_SOURCES || 'athome' }}
         run: python scripts/monitor_rentals.py

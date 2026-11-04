@@ -10,7 +10,7 @@ To test notifications:
 
 ## Rental monitoring
 
-The **Monitor rentals** workflow checks atHome and Immotop every 15 minutes
+The **Monitor rentals** workflow checks atHome every 15 minutes
 from **08:00 through the 20:00 slot**, **Monday–Saturday**, in
 **Europe/Luxembourg** local time (daylight saving adjusts automatically).
 Manual runs bypass the time window and Sunday exclusion.
@@ -27,16 +27,19 @@ variables:
 | `MONITOR_END` | `20:00` | Last local check slot, inclusive |
 | `MONITOR_TIMEZONE` | `Europe/Luxembourg` | IANA timezone |
 | `MONITOR_INTERVAL_MINUTES` | `15` | Multiple of 15, from 15 to 1440, counted from the start time |
+| `MONITOR_SOURCES` | `athome` | Comma-separated sources; use `athome,immotop` to retry Immotop |
 
-Start/end times must use `HH:MM` on quarter-hour boundaries. Overnight windows
-are supported (for example, `22:00` to `06:00`). Equal start/end times allow
+Start/end times must use `HH:MM` on quarter-hour boundaries. Equal start/end times allow
 just that slot. The last slot includes its following 14 minutes to tolerate
 small runner delays. Delayed runs use the current local slot; GitHub does not
 guarantee exact execution times or backfill missed checks.
 
-GitHub cron cannot read environment variables, so it triggers a lightweight
-schedule job every 15 minutes Monday–Saturday, using Luxembourg time for the
-cron calendar. No scheduled workflows are triggered on Luxembourg Sundays.
+GitHub cron cannot read environment variables. The cron itself requests runs
+every 15 minutes from 08:00 to 19:45, plus 20:00, Monday–Saturday, in Luxembourg
+time. Changing the variables can narrow this window or reduce frequency;
+expanding it (including overnight hours) requires editing the cron as well.
+No scheduled workflows are requested overnight or on Luxembourg Sundays.
+GitHub can delay or drop scheduled runs, so this is not a guaranteed interval.
 The gate also excludes Sundays in `MONITOR_TIMEZONE` if overridden.
 Outside the configured slots, the actual
 monitor job is skipped before dependencies are installed or websites checked.
@@ -75,7 +78,10 @@ make the run fail visibly in Actions. A failure on one site does not stop
 the other site from being checked. Sites can block automated browsers, including
 GitHub runners; live access and delivery need to be verified in Actions.
 atHome search parameters and one detail page were verified with Chromium during
-development. Immotop returned HTTP 403, so its live parser remains unverified.
+development. Immotop returned HTTP 403 on live runs, so it is disabled by
+default with a visible warning. This does not restore Immotop coverage; use
+its native saved-search alerts for that site. Opting in through `MONITOR_SOURCES`
+retries its parser, and blocked access still makes the run fail visibly.
 Parser tests use small representative HTML examples, including the atHome
 structured-data layout observed on the live page.
 
