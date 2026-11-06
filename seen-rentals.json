@@ -250,5 +250,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/luxembourg/id-9418364.html": {
+    "url": "https://www.athome.lu/location/appartement/luxembourg/id-9418364.html",
+    "title": "Appartement 3 chambres \u00e0 Luxembourg-Gasperich - Cloche d'or",
+    "rent": 950.0,
+    "area": 130.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
