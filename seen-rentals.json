@@ -259,5 +259,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/schifflange/id-9423605.html": {
+    "url": "https://www.athome.lu/location/appartement/schifflange/id-9423605.html",
+    "title": "Appartement 1 chambre \u00e0 Schifflange",
+    "rent": 1800.0,
+    "area": 60.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
