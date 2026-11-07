@@ -340,5 +340,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/maison/herborn/id-9365381.html": {
+    "url": "https://www.athome.lu/location/maison/herborn/id-9365381.html",
+    "title": "Maison 3 chambres \u00e0 Herborn",
+    "rent": 1050.0,
+    "area": 165.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
