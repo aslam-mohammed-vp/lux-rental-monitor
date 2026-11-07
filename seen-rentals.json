@@ -331,5 +331,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/roeser/id-8243842.html": {
+    "url": "https://www.athome.lu/location/appartement/roeser/id-8243842.html",
+    "title": "Appartement 1 chambre \u00e0 Roeser",
+    "rent": 1600.0,
+    "area": 69.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
