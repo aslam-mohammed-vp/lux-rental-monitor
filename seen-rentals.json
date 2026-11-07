@@ -304,5 +304,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/erpeldange-wiltz/id-9385190.html": {
+    "url": "https://www.athome.lu/location/appartement/erpeldange-wiltz/id-9385190.html",
+    "title": "Appartement 2 chambres \u00e0 Erpeldange (Wiltz)",
+    "rent": 1800.0,
+    "area": 127.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
