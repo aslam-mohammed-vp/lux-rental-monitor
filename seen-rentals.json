@@ -367,5 +367,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/dudelange/id-9374479.html": {
+    "url": "https://www.athome.lu/location/appartement/dudelange/id-9374479.html",
+    "title": "Appartement 2 chambres \u00e0 Dudelange",
+    "rent": 1700.0,
+    "area": 80.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
