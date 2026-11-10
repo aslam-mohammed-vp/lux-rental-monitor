@@ -394,5 +394,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/luxembourg/id-9432136.html": {
+    "url": "https://www.athome.lu/location/appartement/luxembourg/id-9432136.html",
+    "title": "Appartement 1 chambre \u00e0 Luxembourg-Cessange",
+    "rent": 1750.0,
+    "area": 60.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
