@@ -466,5 +466,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/wickrange/id-9432702.html": {
+    "url": "https://www.athome.lu/location/appartement/wickrange/id-9432702.html",
+    "title": "Appartement 1 chambre \u00e0 Wickrange",
+    "rent": 1700.0,
+    "area": 52.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
