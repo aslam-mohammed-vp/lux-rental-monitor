@@ -484,5 +484,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/binsfeld/id-9436184.html": {
+    "url": "https://www.athome.lu/location/appartement/binsfeld/id-9436184.html",
+    "title": "Appartement 2 chambres \u00e0 Binsfeld",
+    "rent": 1400.0,
+    "area": 73.0,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
