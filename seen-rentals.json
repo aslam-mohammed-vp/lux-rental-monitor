@@ -511,5 +511,14 @@
     "country": "LU",
     "parking": true,
     "rental": true
+  },
+  "https://www.athome.lu/location/appartement/schengen/id-9216745.html": {
+    "url": "https://www.athome.lu/location/appartement/schengen/id-9216745.html",
+    "title": "Appartement 2 chambres \u00e0 Schengen",
+    "rent": 1700.0,
+    "area": 91.42,
+    "country": "LU",
+    "parking": true,
+    "rental": true
   }
 }
